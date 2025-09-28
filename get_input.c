@@ -55,29 +55,31 @@ int get_num(double *num){
 }
 
 char get_operator(void){
-    int op;
+    char op[8];
 
     for(;;){
-        op = getchar();
-
-        if(op == EOF){
-            puts("Input cancelled or ended.");
+        if(fgets(op, sizeof(op), stdin) == NULL){
+            fprintf(stderr, "\nError: Input cancelled or error occurred.\n");
             return '\0';
         }
 
-        if(op == '\n'){
+        if(op[0] == '\n'){
             puts("Empty input");
             continue;
         }
 
-        int ch;
-        while((ch = getchar()) != '\n' && ch != EOF);
+        if(strchr(op, '\n') == NULL){
+            int ch;
+            while((ch = getchar()) != EOF && ch != '\n');
+            puts("Input too long.");
+            continue;
+        }
 
-        if(op != '+' && op != '-' && op != '*' && op != '/'){
+        if(op[1] != '\n' || (op[0] != '+' && op[0] != '-' && op[0] != '*' && op[0] != '/')){
             puts("Invalid input.");
             continue;
         }
 
-        return (char)op;
+        return op[0];
     }
 }

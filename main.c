@@ -25,6 +25,19 @@ int main(void){
             puts("Error.");
             return 1;
         }
+
+        switch(operator){
+            case '\0':
+                return 1;
+            case '+':
+                result = add(num1, num2);
+                break;
+            case '-':
+            case '*':
+            case '/':
+        }
+
+        printf("%f\n", result);
     }
     
     return 0;
