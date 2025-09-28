@@ -53,3 +53,31 @@ int get_num(double *num){
         return 0;
     }
 }
+
+char get_operator(void){
+    int op;
+
+    for(;;){
+        op = getchar();
+
+        if(op == EOF){
+            puts("Input cancelled or ended.");
+            return '\0';
+        }
+
+        if(op == '\n'){
+            puts("Empty input");
+            continue;
+        }
+
+        int ch;
+        while((ch = getchar()) != '\n' && ch != EOF);
+
+        if(op != '+' && op != '-' && op != '*' && op != '/'){
+            puts("Invalid input.");
+            continue;
+        }
+
+        return (char)op;
+    }
+}
